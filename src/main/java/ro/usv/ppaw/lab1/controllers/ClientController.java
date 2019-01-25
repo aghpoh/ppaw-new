@@ -9,6 +9,8 @@ import ro.usv.ppaw.lab1.services.ClientService;
 import ro.usv.ppaw.lab1.services.VehicleService;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("clients")
@@ -30,10 +32,18 @@ public class ClientController {
 
   @PostMapping(value = "/all")
   public String clientVehicles(@RequestParam("client") Long clientId, Model model) {
-    List<VehicleRentsDTO> rents = clientService.findVehicleRents(clientId);
-    model.addAttribute("vehicles", rents);
+    model.addAttribute("vehicles",  clientService.findVehicleRents(clientId));
     model.addAttribute("clients", clientService.findAll());
+    getSelectedClient(clientId, model);
 
     return "pages/clients/all";
+  }
+
+  private void getSelectedClient(@RequestParam("client") Long clientId, Model model) {
+    if (!clientService.findById(clientId).isPresent()) {
+      model.addAttribute("selectedClient", null);
+    } else {
+      model.addAttribute("selectedClient", clientService.findById(clientId).get());
+    }
   }
 }
