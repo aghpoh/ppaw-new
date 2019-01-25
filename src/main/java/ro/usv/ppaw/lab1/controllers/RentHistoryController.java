@@ -42,10 +42,12 @@ public class RentHistoryController {
             }
         }
 
+        Collections.sort(brands);
+
         List<Client> clients = clientService.findAll();
         List<ClientMeanRentsDTO> meanRentList = new ArrayList<>();
         for (Client client : clients) {
-            Map<String, Integer> map = new HashMap<>();
+            Map<String, Integer> map = new TreeMap<>();
             for (String brand : brands) {
                 MeanTimeDTO meanRentTime = vehicleService.getMeanRentTime(client.getId(), brand);
                 if (meanRentTime == null) {
