@@ -3,27 +3,56 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
       <title>Vehicle Title</title>
+      <th:block th:include="fragments/head.html"/>
 </head>
 <body>
-<h1>Vehicle page</h1>
+<th:block th:include="fragments/nav.html"/>
 
-<form action="/vehicles/all" th:method="POST">
-      <div class="form-group blu-margin">
-            <select class="form-control" name="vehicle" id="dropVehicle">
-                  <option value="" selected>Select Vehicle</option>
-                  <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.model}" />
-            </select>
+<div class="card">
+      <div class="card-header">
+            Vehicle page
       </div>
-      <button type="submit"> View</button>
-</form>
-<table>
-      <th:block th:each="client : ${clients}">
-            <tr>
-                  <td th:text="${client.first_Name}" />
-                  <td th:text="${client.last_Name}" />
-                  <td th:text="${client.days}" />
-            </tr>
-      </th:block>
-</table>
+      <div class="card-body">
+            <form action="/vehicles/all" method="POST">
+                  <div class="form-group">
+                        <label class="uk-form-label" for="vehicle-select">Vehicle</label>
+                        <select class="form-control" name="vehicle" id="vehicle-select">
+                              <option value="0" selected>Alege masina</option>
+                              <option th:each="vehicle : ${vehicles}"
+                                      th:value="${vehicle.id}"
+                                      th:text="${vehicle.model}"
+                              />
+                        </select>
+                  </div>
+                  <input type="submit" class="btn btn-primary mb-2" th:value="Cautare"/>
+            </form>
+
+            <br>
+            <br>
+            <div th:if="${clients != null && selectedVehicle != null}">
+                  <h2 th:text="'Detalii pentru masina: ' + ${selectedVehicle.model}"/>
+                  <table class="table table-striped">
+                        <thead>
+                        <tr>
+                              <th>Nume</th>
+                              <th>Prenume</th>
+                              <th>Nr de inchirieri</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="client : ${clients}">
+                              <tr>
+                                    <td th:text="${client.first_Name}"/>
+                                    <td th:text="${client.last_Name}"/>
+                                    <td th:text="${client.days}"/>
+                              </tr>
+                        </th:block>
+                        </tbody>
+                  </table>
+            </div>
+      </div>
+</div>
+
+<th:block th:include="fragments/footer.html"/>
 </body>
 </html>

@@ -25,10 +25,19 @@ public class VehicleController {
     }
 
     @PostMapping(value = "/all")
-    public String clientVehicles(@RequestParam("vehicle") Long vehicleId, Model model) {
-        model.addAttribute("clients", vehicleService.findClientRents(vehicleId));
+    public String clientVehicles(@RequestParam("vehicle") Long vehicle, Model model) {
+        model.addAttribute("clients", vehicleService.findClientRents(vehicle));
         model.addAttribute("vehicles", vehicleService.findAll());
+        getSelectedVehicle(vehicle, model);
 
         return "pages/vehicles/all";
+    }
+
+    private void getSelectedVehicle(@RequestParam("vehicle") Long vehicle, Model model) {
+        if (!vehicleService.findById(vehicle).isPresent()) {
+            model.addAttribute("selectedVehicle", null);
+        } else {
+            model.addAttribute("selectedVehicle", vehicleService.findById(vehicle).get());
+        }
     }
 }

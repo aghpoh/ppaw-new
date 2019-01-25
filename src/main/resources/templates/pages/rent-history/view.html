@@ -3,25 +3,39 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
       <title>Vehicle Title</title>
+      <th:block th:include="fragments/head.html"/>
 </head>
 <body>
-<h1>Vehicle page</h1>
+<th:block th:include="fragments/nav.html"/>
 
-<table>
-      <tr>
-            <th>Clients</th>
-            <th:block th:each="brand : ${brands}">
-                  <th th:text="${brand}"/>
-            </th:block>
-      </tr>
-      <th:block th:each="client : ${client_rents}">
-            <tr>
-                  <td th:text="${client.firstName} + ' ' + ${client.lastName}"/>
-                  <th:block th:each="x : ${client.map}">
-                        <td th:text="${x.value}"/>
+<div class="card">
+      <div class="card-header">
+            Rent History page
+      </div>
+      <div class="card-body">
+            <table class="table table-striped">
+                  <thead>
+                  <tr>
+                        <th class="uk-text-bold">Clienti</th>
+                        <th:block th:each="brand : ${brands}">
+                              <th class="uk-text-bold" th:text="${brand}"/>
+                        </th:block>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <th:block th:each="client : ${client_rents}">
+                        <tr>
+                              <td th:text="${client.firstName} + ' ' + ${client.lastName}"/>
+                              <th:block th:each="x : ${client.map}">
+                                    <td th:text="${x.value}"/>
+                              </th:block>
+                        </tr>
                   </th:block>
-            </tr>
-      </th:block>
-</table>
+                  </tbody>
+            </table>
+      </div>
+</div>
+
+<th:block th:include="fragments/footer.html"/>
 </body>
 </html>

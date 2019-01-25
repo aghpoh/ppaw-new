@@ -41,7 +41,9 @@ public class RentHistoryController {
                 brands.add(vehicle.getModel());
             }
         }
+
         Collections.sort(brands);
+
         List<Client> clients = clientService.findAll();
         List<ClientMeanRentsDTO> meanRentList = new ArrayList<>();
         for (Client client : clients) {
