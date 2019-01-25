@@ -6,76 +6,67 @@
       <th:block th:include="fragments/head.html"/>
 </head>
 <body>
-<div uk-grid>
-      <div class="uk-width-1@s uk-width-1-4@m">
-            <th:block th:include="fragments/nav.html"/>
+<th:block th:include="fragments/nav.html"/>
+<div class="card">
+      <div class="card-header">
+            Rent page
       </div>
-      <div class="uk-width-1@s uk-width-3-4@m">
-            <div class="uk-card uk-card-body">
-                  <h2>Rent page</h2>
-                  <hr>
-                  <form class="uk-form-horizontal uk-margin-large" th:action="@{/rents/add}" th:object="${rent}"
-                        th:method="POST">
-                        <div class="uk-margin">
-                              <label class="uk-form-label" for="vehicle-select">Vehicle</label>
-                              <div class="uk-form-controls">
-                                    <select th:field="*{vehicle}" class="uk-select" id="vehicle-select">
-                                          <option value="" selected>Choose vehicle</option>
-                                          <option th:each="vehicle : ${vehicles}"
-                                                  th:value="${vehicle.id}"
-                                                  th:utext="${vehicle.model}"/>
-                                    </select>
-                                    <p class="uk-text-danger uk-margin-small-top" th:if="${#fields.hasErrors('vehicle')}"
-                                       th:errors="*{vehicle}">
-                                          Vehicle Error
-                                    </p>
-                              </div>
-                        </div>
+      <div class="card-body">
+            <form class="uk-form-horizontal uk-margin-large" th:action="@{/rents/add}" th:object="${rent}" th:method="POST">
+                  <div class="form-group">
+                        <label class="uk-form-label" for="vehicle-select">Vehicle</label>
+                        <select class="form-control" th:field="*{vehicle}" id="vehicle-select">
+                              <option value="" selected>Choose vehicle</option>
+                              <option th:each="vehicle : ${vehicles}"
+                                      th:value="${vehicle.id}"
+                                      th:utext="${vehicle.model}"/>
+                        </select>
+                        <p class="text-danger" th:if="${#fields.hasErrors('vehicle')}"
+                           th:errors="*{vehicle}">
+                              Vehicle Error
+                        </p>
+                  </div>
 
-                        <div class="uk-margin">
-                              <label class="uk-form-label" for="client-select">Client</label>
-                              <div class="uk-form-controls">
-                                    <select th:field="*{client}" class="uk-select" id="client-select">
-                                          <option value="" selected>Choose client</option>
-                                          <option th:each="client : ${clients}"
-                                                  th:value="${client.id}"
-                                                  th:utext="${client.firstName} + ' ' + ${client.lastName}"/>
-                                    </select>
-                                    <p
-                                            th:if="${#fields.hasErrors('client')}"
-                                            th:errors="*{client}"
-                                            class="uk-form-danger uk-text-danger uk-margin-small-top"
-                                    >
-                                          Client Error
-                                    </p>
-                              </div>
-                        </div>
+                  <div class="form-group">
+                        <label class="uk-form-label" for="vehicle-select">Client</label>
+                        <select class="form-control" th:field="*{client}" id="client-select">
+                              <option value="" selected>Choose client</option>
+                              <option th:each="client : ${clients}"
+                                      th:value="${client.id}"
+                                      th:utext="${client.firstName} + ' ' + ${client.lastName}"/>
+                        </select>
+                        <p
+                                th:if="${#fields.hasErrors('client')}"
+                                th:errors="*{client}"
+                                class="text-danger"
+                        >
+                              Client Error
+                        </p>
+                  </div>
 
-                        <div class="uk-margin">
-                              <label class="uk-form-label" for="form-horizontal-text">Nr. of days</label>
-                              <div class="uk-form-controls">
-                                    <input class="uk-input"
-                                           id="form-horizontal-text"
-                                           type="number"
-                                           required
-                                           th:field="*{days}"
-                                           placeholder="Nr de zile"
-                                    />
-                                    <p
-                                      th:if="${#fields.hasErrors('days')}"
-                                      th:errors="*{days}"
-                                      class="uk-form-danger uk-text-danger uk-margin-top"
-                                    >
-                                          Client Error
-                                    </p>
-                              </div>
-                        </div>
-                        <button type="submit" class="uk-button uk-button-primary">Inchiriere</button>
-                  </form>
-            </div>
+                  <div class="form-group">
+                        <label class="uk-form-label" for="form-horizontal-text">Nr. of days</label>
+                        <input class="form-control"
+                               id="form-horizontal-text"
+                               type="number"
+                               required
+                               th:field="*{days}"
+                               placeholder="Nr de zile"
+                        />
+                        <p
+                                th:if="${#fields.hasErrors('days')}"
+                                th:errors="*{days}"
+                                class="uk-form-danger uk-text-danger uk-margin-top"
+                        >
+                              Client Error
+                        </p>
+                  </div>
 
+                  <button type="submit" class="btn btn-primary mb-2">Inchiriere</button>
+            </form>
       </div>
 </div>
+
 
 <th:block th:include="fragments/footer.html"/>
 </body>

@@ -1,5 +1,7 @@
-@media only screen  and (min-width: 960px) {
-    .nav-custom {
-        height: 100vh;
-    }
+body {
+    padding: 20px;
+}
+
+.nav {
+    padding: 20px 20px 30px;
 }

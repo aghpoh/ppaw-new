@@ -6,53 +6,51 @@
       <th:block th:include="fragments/head.html"/>
 </head>
 <body>
-<div uk-grid>
-      <div class="uk-width-1@s uk-width-1-4@m">
-            <th:block th:include="fragments/nav.html"/>
+<th:block th:include="fragments/nav.html"/>
+<div class="card">
+      <div class="card-header">
+            Clients page
       </div>
-      <div class="uk-width-1@s uk-width-3-4@m">
-            <div class="uk-card uk-card-body">
-                  <h1>Clients page</h1>
-                  <hr>
-                  <form class="uk-form-horizontal uk-margin-large" action="/clients/all" method="POST">
-                        <div class="uk-margin">
-                              <label class="uk-form-label" for="vehicle-select">Vehicle</label>
-                              <div class="uk-form-controls">
-                                    <select class="uk-select" name="client" id="vehicle-select">
-                                          <option value="0" selected>Choose Client</option>
-                                          <option th:each="client : ${clients}"
-                                                  th:value="${client.id}"
-                                                  th:text="${client.firstName} + ' ' + ${client.lastName}"
-                                          />
-                                    </select>
-                              </div>
-                        </div>
-                        <input type="submit" class="uk-button uk-button-primary" th:value="Cautare"/>
-                  </form>
-
-                  <div th:if="${vehicles != null && selectedClient != null}">
-                        <h2 th:text="'Detalii pentru clientul: ' + ${selectedClient.firstName} + ' ' + ${selectedClient.lastName}"/>
-                        <hr>
-                        <table class="uk-table uk-table-striped">
-                              <thead>
-                              <tr>
-                                    <th>Masina</th>
-                                    <th>Nr de inchirieri</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <th:block th:each="vehicle : ${vehicles}">
-                                    <tr>
-                                          <td th:text="${vehicle.model}"/>
-                                          <td th:text="${vehicle.days}"/>
-                                    </tr>
-                              </th:block>
-                              </tbody>
-                        </table>
+      <div class="card-body">
+            <form action="/clients/all" method="POST">
+                  <div class="form-group">
+                        <label for="vehicle">Vehicle</label>
+                        <select class="form-control" name="client" id="vehicle">
+                              <option value="0" selected>Choose Client</option>
+                              <option th:each="client : ${clients}"
+                                      th:value="${client.id}"
+                                      th:text="${client.firstName} + ' ' + ${client.lastName}"
+                              />
+                        </select>
                   </div>
+                  <input type="submit" class="btn btn-primary mb-2"th:value="Cautare"/>
+            </form>
+
+            <br>
+            <br>
+
+            <div th:if="${vehicles != null && selectedClient != null}">
+                  <h2 th:text="'Detalii pentru clientul: ' + ${selectedClient.firstName} + ' ' + ${selectedClient.lastName}"/>
+                  <table class="table table-striped">
+                        <thead>
+                        <tr>
+                              <th>Masina</th>
+                              <th>Nr de inchirieri</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <th:block th:each="vehicle : ${vehicles}">
+                              <tr>
+                                    <td th:text="${vehicle.model}"/>
+                                    <td th:text="${vehicle.days}"/>
+                              </tr>
+                        </th:block>
+                        </tbody>
+                  </table>
             </div>
       </div>
 </div>
+
 
 <th:block th:include="fragments/footer.html"/>
 </body>

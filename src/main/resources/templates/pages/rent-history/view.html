@@ -6,35 +6,33 @@
       <th:block th:include="fragments/head.html"/>
 </head>
 <body>
-<div uk-grid>
-      <div class="uk-width-1@s uk-width-1-4@m">
-            <th:block th:include="fragments/nav.html"/>
+<th:block th:include="fragments/nav.html"/>
+
+<div class="card">
+      <div class="card-header">
+            Rent History page
       </div>
-      <div class="uk-width-1@s uk-width-3-4@m">
-            <div class="uk-card uk-card-body">
-                  <h1>Rent History page</h1>
-                  <hr>
-                  <table class="uk-table uk-table-striped">
-                        <thead>
+      <div class="card-body">
+            <table class="table table-striped">
+                  <thead>
+                  <tr>
+                        <th class="uk-text-bold">Clienti</th>
+                        <th:block th:each="brand : ${brands}">
+                              <th class="uk-text-bold" th:text="${brand}"/>
+                        </th:block>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <th:block th:each="client : ${client_rents}">
                         <tr>
-                              <th class="uk-text-bold">Clienti</th>
-                              <th:block th:each="brand : ${brands}">
-                                    <th class="uk-text-bold" th:text="${brand}"/>
+                              <td th:text="${client.firstName} + ' ' + ${client.lastName}"/>
+                              <th:block th:each="x : ${client.map}">
+                                    <td th:text="${x.value}"/>
                               </th:block>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <th:block th:each="client : ${client_rents}">
-                              <tr>
-                                    <td th:text="${client.firstName} + ' ' + ${client.lastName}"/>
-                                    <th:block th:each="x : ${client.map}">
-                                          <td th:text="${x.value}"/>
-                                    </th:block>
-                              </tr>
-                        </th:block>
-                        </tbody>
-                  </table>
-            </div>
+                  </th:block>
+                  </tbody>
+            </table>
       </div>
 </div>
 
