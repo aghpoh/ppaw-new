@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+      <title>Vehicle Title</title>
+</head>
+<body>
+<h1>Vehicle page</h1>
+
+<table>
+      <tr>
+            <th>Clients</th>
+            <th:block th:each="brand : ${brands}">
+                  <th th:text="${brand}"/>
+            </th:block>
+      </tr>
+      <th:block th:each="client : ${client_rents}">
+            <tr>
+                  <td th:text="${client.firstName} + ' ' + ${client.lastName}"/>
+                  <th:block th:each="x : ${client.map}">
+                        <td th:text="${x.value}"/>
+                  </th:block>
+            </tr>
+      </th:block>
+</table>
+</body>
+</html>

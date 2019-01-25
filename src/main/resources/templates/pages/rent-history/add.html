@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+      <title>Vehicle Title</title>
+      <th:block th:include="fragments/head.html"/>
+</head>
+<body>
+<div uk-grid>
+      <div class="uk-width-1@s uk-width-1-4@m">
+            <th:block th:include="fragments/nav.html"/>
+      </div>
+      <div class="uk-width-1@s uk-width-3-4@m">
+            <div class="uk-card uk-card-body">
+                  <h2>Rent page</h2>
+                  <hr>
+                  <form class="uk-form-horizontal uk-margin-large" th:action="@{/rents/add}" th:object="${rent}"
+                        th:method="POST">
+                        <div class="uk-margin">
+                              <label class="uk-form-label" for="vehicle-select">Vehicle</label>
+                              <div class="uk-form-controls">
+                                    <select th:field="*{vehicle}" class="uk-select" id="vehicle-select">
+                                          <option value="" selected>Choose vehicle</option>
+                                          <option th:each="vehicle : ${vehicles}"
+                                                  th:value="${vehicle.id}"
+                                                  th:utext="${vehicle.model}"/>
+                                    </select>
+                                    <p class="uk-text-danger uk-margin-small-top" th:if="${#fields.hasErrors('vehicle')}"
+                                       th:errors="*{vehicle}">
+                                          Vehicle Error
+                                    </p>
+                              </div>
+                        </div>
+
+                        <div class="uk-margin">
+                              <label class="uk-form-label" for="client-select">Client</label>
+                              <div class="uk-form-controls">
+                                    <select th:field="*{client}" class="uk-select" id="client-select">
+                                          <option value="" selected>Choose client</option>
+                                          <option th:each="client : ${clients}"
+                                                  th:value="${client.id}"
+                                                  th:utext="${client.firstName} + ' ' + ${client.lastName}"/>
+                                    </select>
+                                    <p
+                                            th:if="${#fields.hasErrors('client')}"
+                                            th:errors="*{client}"
+                                            class="uk-form-danger uk-text-danger uk-margin-small-top"
+                                    >
+                                          Client Error
+                                    </p>
+                              </div>
+                        </div>
+
+                        <div class="uk-margin">
+                              <label class="uk-form-label" for="form-horizontal-text">Nr. of days</label>
+                              <div class="uk-form-controls">
+                                    <input class="uk-input"
+                                           id="form-horizontal-text"
+                                           type="number"
+                                           required
+                                           th:field="*{days}"
+                                           placeholder="Nr de zile"
+                                    />
+                                    <p
+                                      th:if="${#fields.hasErrors('days')}"
+                                      th:errors="*{days}"
+                                      class="uk-form-danger uk-text-danger uk-margin-top"
+                                    >
+                                          Client Error
+                                    </p>
+                              </div>
+                        </div>
+                        <button type="submit" class="uk-button uk-button-primary">Inchiriere</button>
+                  </form>
+            </div>
+
+      </div>
+</div>
+
+<th:block th:include="fragments/footer.html"/>
+</body>
+</html>

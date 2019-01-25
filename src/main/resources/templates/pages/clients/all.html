@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+      <title>Client Title</title>
+</head>
+<body>
+<h1>Clients page</h1>
+
+<form action="/clients/all" method="POST">
+      <div class="form-group blu-margin">
+            <select class="form-control" name="client" id="dropClient">
+                  <option value="0">select client</option>
+                  <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.firstName} + ' ' + ${client.lastName}" />
+            </select>
+      </div>
+      <input type="submit" value="View">
+</form>
+<table>
+      <th:block th:each="vehicle : ${vehicles}">
+            <tr>
+                  <td th:text="${vehicle.model}" />
+                  <td th:text="${vehicle.days}" />
+            </tr>
+      </th:block>
+</table>
+</body>
+</html>
