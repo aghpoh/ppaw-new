@@ -3,27 +3,59 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
       <title>Vehicle Title</title>
+      <th:block th:include="fragments/head.html"/>
 </head>
 <body>
-<h1>Vehicle page</h1>
-
-<form action="/vehicles/all" th:method="POST">
-      <div class="form-group blu-margin">
-            <select class="form-control" name="vehicle" id="dropVehicle">
-                  <option value="" selected>Select Vehicle</option>
-                  <option th:each="vehicle : ${vehicles}" th:value="${vehicle.id}" th:text="${vehicle.model}" />
-            </select>
+<div uk-grid>
+      <div class="uk-width-1@s uk-width-1-4@m">
+            <th:block th:include="fragments/nav.html"/>
       </div>
-      <button type="submit"> View</button>
-</form>
-<table>
-      <th:block th:each="client : ${clients}">
-            <tr>
-                  <td th:text="${client.first_Name}" />
-                  <td th:text="${client.last_Name}" />
-                  <td th:text="${client.days}" />
-            </tr>
-      </th:block>
-</table>
+      <div class="uk-width-1@s uk-width-3-4@m">
+            <div class="uk-card uk-card-body">
+                  <h1>Vehicle page</h1>
+                  <hr>
+                  <form class="uk-form-horizontal uk-margin-large" action="/vehicles/all" method="POST">
+                        <div class="uk-margin">
+                              <label class="uk-form-label" for="vehicle-select">Vehicle</label>
+                              <div class="uk-form-controls">
+                                    <select class="uk-select" name="vehicle" id="vehicle-select">
+                                          <option value="0" selected>Alege masina</option>
+                                          <option th:each="vehicle : ${vehicles}"
+                                                  th:value="${vehicle.id}"
+                                                  th:text="${vehicle.model}"
+                                          />
+                                    </select>
+                              </div>
+                        </div>
+                        <input type="submit" class="uk-button uk-button-primary" th:value="Cautare"/>
+                  </form>
+
+                  <div th:if="${clients != null && selectedVehicle != null}">
+                        <h2 th:text="'Detalii pentru masina: ' + ${selectedVehicle.model}"/>
+                        <hr>
+                        <table class="uk-table uk-table-striped">
+                              <thead>
+                              <tr>
+                                    <th>Nume</th>
+                                    <th>Prenume</th>
+                                    <th>Nr de inchirieri</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <th:block th:each="client : ${clients}">
+                                    <tr>
+                                          <td th:text="${client.first_Name}"/>
+                                          <td th:text="${client.last_Name}"/>
+                                          <td th:text="${client.days}"/>
+                                    </tr>
+                              </th:block>
+                              </tbody>
+                        </table>
+                  </div>
+            </div>
+      </div>
+</div>
+
+<th:block th:include="fragments/footer.html"/>
 </body>
 </html>

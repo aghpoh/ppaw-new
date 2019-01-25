@@ -27,11 +27,11 @@
                                     </select>
                               </div>
                         </div>
-                        <input type="submit" class="uk-button uk-button-primary" th:value="Cautare" />
+                        <input type="submit" class="uk-button uk-button-primary" th:value="Cautare"/>
                   </form>
 
                   <div th:if="${vehicles != null && selectedClient != null}">
-                        <h2 th:text="'Detalii pentru clientul: ' + ${selectedClient.firstName} + ' ' + ${selectedClient.lastName}" />
+                        <h2 th:text="'Detalii pentru clientul: ' + ${selectedClient.firstName} + ' ' + ${selectedClient.lastName}"/>
                         <hr>
                         <table class="uk-table uk-table-striped">
                               <thead>
@@ -43,8 +43,8 @@
                               <tbody>
                               <th:block th:each="vehicle : ${vehicles}">
                                     <tr>
-                                          <td th:text="${vehicle.model}" />
-                                          <td th:text="${vehicle.days}" />
+                                          <td th:text="${vehicle.model}"/>
+                                          <td th:text="${vehicle.days}"/>
                                     </tr>
                               </th:block>
                               </tbody>
